@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -12,19 +13,45 @@ namespace Open_Lab_10._01
         static void Main(string[] args)
         {
             Book LOTR = new Book();
-            LOTR.SetBook("Creative name of book", 100);
+            LOTR.SetTitle("Creative name of book");
+            LOTR.SetPages(100);
+            LOTR.SetCategory("encyclopedia");
+            LOTR.SetAuthor("Jaro");
+            LOTR.SetReleaseDate("7.11.2020");
+            LOTR.GetBook();
             Console.ReadKey();
         }
     }
     class Book
     {
-        public string title;
+        private string title;
         private int pages;
-        public void SetBook(string title, int pages)
+        private string category;
+        private string author;
+        private string releaseDate;
+        public void SetTitle(string str)
         {
-            this.title = title;
-            this.pages = pages;
-            Console.WriteLine(String.Format($"Book \"{title}\" has {pages} pages."));
+            this.title = str;
+        }
+        public void SetPages(int i)
+        {
+            this.pages = i;
+        }
+        public void SetCategory(string str)
+        {
+            this.category = str;
+        }
+        public void SetAuthor(string str)
+        {
+            this.author = str;
+        }
+        public void SetReleaseDate(string str)
+        {
+            this.releaseDate = str;
+        }
+        public void GetBook()
+        {
+            Console.WriteLine(String.Format($"Book \"{title}\" has {pages} pages, it is {category} by {author} and it was released {releaseDate}."));
         }
     }
 }
